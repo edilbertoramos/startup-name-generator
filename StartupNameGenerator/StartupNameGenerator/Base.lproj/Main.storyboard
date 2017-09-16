@@ -44,12 +44,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Lb-Ea-XBY">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Lb-Ea-XBY">
                                                     <rect key="frame" x="323" y="7" width="31" height="30"/>
+                                                    <color key="backgroundColor" red="0.00082392926560000005" green="0.40081346039999999" blue="0.57550078630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="MWD-D2-89F"/>
                                                         <constraint firstAttribute="width" constant="31" id="hJa-uZ-LiE"/>
                                                     </constraints>
+                                                    <state key="normal" image="favorite_on"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -208,4 +210,7 @@
             <point key="canvasLocation" x="-1082.4000000000001" y="35.532233883058474"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite_on" width="24" height="24"/>
+    </resources>
 </document>

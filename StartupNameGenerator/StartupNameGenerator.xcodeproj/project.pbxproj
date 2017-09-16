@@ -98,13 +98,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2433C2831F6D8E2200DE1A7B /* Cell */ = {
+		2433C2831F6D8E2200DE1A7B /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
 				2433C27F1F6D8E0900DE1A7B /* NameTableViewCell.h */,
 				2433C2801F6D8E0900DE1A7B /* NameTableViewCell.m */,
 			);
-			name = Cell;
+			name = CustomCell;
+			sourceTree = "<group>";
+		};
+		2433C2841F6D9AC500DE1A7B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7F0FA9081EAFC79600778B00 /* ViewController.h */,
+				7F0FA9091EAFC79600778B00 /* ViewController.m */,
+				2433C2831F6D8E2200DE1A7B /* CustomCell */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2433C2851F6D9AFE00DE1A7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7F0FA9131EAFC79600778B00 /* LaunchScreen.storyboard */,
+				7F0FA90B1EAFC79600778B00 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2433C2861F6D9B3300DE1A7B /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				7F0FA9111EAFC79600778B00 /* Assets.xcassets */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 		493ED99815FA92CF4277EE3D /* Pods */ = {
@@ -142,16 +169,10 @@
 			isa = PBXGroup;
 			children = (
 				7F7DCF671EB04B1600A66CF1 /* Model */,
+				2433C2851F6D9AFE00DE1A7B /* View */,
+				2433C2841F6D9AC500DE1A7B /* Controller */,
 				7F0FA9021EAFC79600778B00 /* Supporting Files */,
-				7F0FA9051EAFC79600778B00 /* AppDelegate.h */,
-				7F0FA9061EAFC79600778B00 /* AppDelegate.m */,
-				7F0FA9111EAFC79600778B00 /* Assets.xcassets */,
-				7F0FA9161EAFC79600778B00 /* Info.plist */,
-				7F0FA9131EAFC79600778B00 /* LaunchScreen.storyboard */,
-				7F0FA90B1EAFC79600778B00 /* Main.storyboard */,
-				7F0FA9081EAFC79600778B00 /* ViewController.h */,
-				7F0FA9091EAFC79600778B00 /* ViewController.m */,
-				2433C2831F6D8E2200DE1A7B /* Cell */,
+				2433C2861F6D9B3300DE1A7B /* Resource */,
 			);
 			path = StartupNameGenerator;
 			sourceTree = "<group>";
@@ -159,6 +180,9 @@
 		7F0FA9021EAFC79600778B00 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7F0FA9161EAFC79600778B00 /* Info.plist */,
+				7F0FA9051EAFC79600778B00 /* AppDelegate.h */,
+				7F0FA9061EAFC79600778B00 /* AppDelegate.m */,
 				7F7DCF801EB04FEE00A66CF1 /* keyword-list.csv */,
 				7F0FA9031EAFC79600778B00 /* main.m */,
 			);
