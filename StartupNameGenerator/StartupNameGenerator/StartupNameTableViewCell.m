@@ -7,16 +7,16 @@
 //
 
 #import "StartupNameTableViewCell.h"
+#import "HistoryStore.h"
 
 @implementation StartupNameTableViewCell
 
-static History *history = nil;
-
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.labelName.text = self.history.startupName;
+    [self setImageFavorite:self.history.isFavorite];
+    
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -24,12 +24,22 @@ static History *history = nil;
 }
 - (IBAction)favoriteAction:(id)sender {
     
+    printf("\n\n");
+    NSLog(@"\n%d", self.history.isFavorite);
+    NSLog(@"\n%@", self.history.startupName.description);
+    self.history.isFavorite = !self.history.isFavorite;
+    
+    [[HistoryStore sharedStore] saveChanges];
+
+
 }
 
-- (void)setValuesWithHistory:(History *)history
+- (void)setValuesWithHistory:(History *)historys andIndex:(NSInteger)row
 {
-    self.labelName.text = history.startupName;
-    [self setImageFavorite:history.isFavorite];
+    self.labelName.text = self.history.startupName;
+    [self setImageFavorite:self.history.isFavorite];
+    
+
 }
 
 - (void)setImageFavorite:(Boolean)isTrue

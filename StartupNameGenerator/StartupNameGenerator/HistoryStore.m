@@ -265,12 +265,13 @@ typedef enum {
     
     History *history = [NSEntityDescription insertNewObjectForEntityForName:@"History"
                                                      inManagedObjectContext:context];
+    history.id = [[[NSUUID alloc] init] UUIDString];
     history.startupName = startupName;
     history.createdAt = [NSDate date];
-    history.isFavorite = FALSE;
+    history.isFavorite = NO;
 }
 
-- (void)deleteAllHistory {
+- (void)deleteAllHistoryExceptFavorite {
     AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
     
@@ -283,6 +284,18 @@ typedef enum {
     
     for (History *history in historyList) {
         [context deleteObject:history];
+    }
+}
+
+- (void)saveChanges {
+    NSError *error;
+    
+    if ([self.managedObjectContext hasChanges]) {
+        BOOL successful = [self.managedObjectContext save:&error];
+        
+        if (!successful) {
+            NSLog(@"Error saving: %@", [error localizedDescription]);
+        }
     }
 }
 

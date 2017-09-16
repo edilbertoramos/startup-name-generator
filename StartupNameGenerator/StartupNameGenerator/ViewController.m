@@ -60,7 +60,7 @@ static NSString *CellIdentifier = @"startupNameCell";
 }
 
 - (IBAction)cleanupButtonTapped:(id)sender {
-    [[HistoryStore sharedStore] deleteAllHistory];
+    [[HistoryStore sharedStore] deleteAllHistoryExceptFavorite];
 }
 
 
@@ -68,7 +68,9 @@ static NSString *CellIdentifier = @"startupNameCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     StartupNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    
+    cell.history = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath] andIndex:indexPath.row];
     return cell;
 }
 
@@ -77,11 +79,6 @@ static NSString *CellIdentifier = @"startupNameCell";
 }
 
 #pragma mark - Utils
-- (void)configureCell:(StartupNameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    History *history = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.labelName.text = history.startupName;
-}
-
 - (void)showErrorToast:(NSString *)message {
     CSToastStyle *toastStyle = [[CSToastStyle alloc] initWithDefaultStyle];
     toastStyle.backgroundColor = UIColor.redColor;
@@ -105,6 +102,7 @@ static NSString *CellIdentifier = @"startupNameCell";
       newIndexPath:(NSIndexPath *)newIndexPath {
 
     UITableView *tableView = self.tableView;
+    StartupNameTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
     switch(type) {
 
@@ -117,7 +115,10 @@ static NSString *CellIdentifier = @"startupNameCell";
             break;
 
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            
+            cell.history = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath] andIndex:indexPath.row];
+
             break;
 
         case NSFetchedResultsChangeMove:

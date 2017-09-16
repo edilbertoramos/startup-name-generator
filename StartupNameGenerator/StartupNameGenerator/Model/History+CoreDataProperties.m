@@ -15,6 +15,7 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"History"];
 }
 
+@dynamic id;
 @dynamic startupName;
 @dynamic createdAt;
 @dynamic isFavorite;

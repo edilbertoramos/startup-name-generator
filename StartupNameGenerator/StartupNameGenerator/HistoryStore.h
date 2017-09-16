@@ -19,7 +19,7 @@
 + (instancetype)sharedStore;
 
 - (void)generateStartupNamesWithKeyword: (NSString *)word;
-- (void)deleteAllHistory;
-- (BOOL)saveChanges;
+- (void)deleteAllHistoryExceptFavorite;
+- (void)saveChanges;
 
 @end

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<History *> *)fetchRequest;
 
+@property (nullable, nonatomic, copy) NSString *id;
 @property (nullable, nonatomic, copy) NSString *startupName;
 @property (nullable, nonatomic, copy) NSDate *createdAt;
 @property (nullable, nonatomic, copy) Boolean isFavorite;

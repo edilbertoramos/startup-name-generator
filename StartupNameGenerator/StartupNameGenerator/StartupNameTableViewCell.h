@@ -10,9 +10,13 @@
 #import "History+CoreDataClass.h"
 
 @interface StartupNameTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) History *history;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet UIButton *buttomFavorite;
 
-- (void)setValuesWithHistory:(History *)history;
+- (void)setValuesWithHistory:(History *)historys andIndex:(NSInteger)row;
 
 @end
