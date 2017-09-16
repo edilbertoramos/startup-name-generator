@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "History+CoreDataClass.h"
 
 @interface StartupNameTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet UIButton *buttomFavorite;
+
+- (void)setValuesWithHistory:(History *)history;
 
 @end

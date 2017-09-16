@@ -10,6 +10,8 @@
 
 @implementation StartupNameTableViewCell
 
+static History *history = nil;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -21,6 +23,24 @@
     // Configure the view for the selected state
 }
 - (IBAction)favoriteAction:(id)sender {
+    
 }
 
+- (void)setValuesWithHistory:(History *)history
+{
+    self.labelName.text = history.startupName;
+    [self setImageFavorite:history.isFavorite];
+}
+
+- (void)setImageFavorite:(Boolean)isTrue
+{
+    [self.buttomFavorite setImage:[UIImage imageNamed:[self name:isTrue]] forState:UIControlStateNormal];
+}
+
+- (NSString *)name: (Boolean)isTrue
+{
+    if (isTrue)
+        return @"favorite_on";
+        return @"favorite_off";
+}
 @end
