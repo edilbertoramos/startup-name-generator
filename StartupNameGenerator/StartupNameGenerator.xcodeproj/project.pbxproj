@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2433C2821F6D8E0900DE1A7B /* NameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C2801F6D8E0900DE1A7B /* NameTableViewCell.m */; };
+		2433C28C1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C28B1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m */; };
 		24C49E2EFCE9015AF1037A53 /* libPods-StartupNameGenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A74B25ABCF5EB0461AA2971 /* libPods-StartupNameGenerator.a */; };
 		7F0FA9041EAFC79600778B00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0FA9031EAFC79600778B00 /* main.m */; };
 		7F0FA9071EAFC79600778B00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0FA9061EAFC79600778B00 /* AppDelegate.m */; };
@@ -39,8 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2433C27F1F6D8E0900DE1A7B /* NameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameTableViewCell.h; sourceTree = "<group>"; };
-		2433C2801F6D8E0900DE1A7B /* NameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameTableViewCell.m; sourceTree = "<group>"; };
+		2433C28A1F6DA0EB00DE1A7B /* StartupNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupNameTableViewCell.h; sourceTree = "<group>"; };
+		2433C28B1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupNameTableViewCell.m; sourceTree = "<group>"; };
 		3157A49361E7EDC0E2C2C7C9 /* Pods-StartupNameGenerator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartupNameGenerator.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-StartupNameGenerator/Pods-StartupNameGenerator.debug.xcconfig"; sourceTree = "<group>"; };
 		5A74B25ABCF5EB0461AA2971 /* libPods-StartupNameGenerator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StartupNameGenerator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F0FA8FF1EAFC79600778B00 /* StartupNameGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartupNameGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,8 +101,8 @@
 		2433C2831F6D8E2200DE1A7B /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
-				2433C27F1F6D8E0900DE1A7B /* NameTableViewCell.h */,
-				2433C2801F6D8E0900DE1A7B /* NameTableViewCell.m */,
+				2433C28A1F6DA0EB00DE1A7B /* StartupNameTableViewCell.h */,
+				2433C28B1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m */,
 			);
 			name = CustomCell;
 			sourceTree = "<group>";
@@ -301,6 +301,7 @@
 				TargetAttributes = {
 					7F0FA8FE1EAFC79600778B00 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = V98QDSD7WQ;
 						ProvisioningStyle = Automatic;
 					};
 					7F0FA91A1EAFC79600778B00 = {
@@ -418,7 +419,7 @@
 			files = (
 				7F0FA9101EAFC79600778B00 /* StartupNameGenerator.xcdatamodeld in Sources */,
 				7F0FA90A1EAFC79600778B00 /* ViewController.m in Sources */,
-				2433C2821F6D8E0900DE1A7B /* NameTableViewCell.m in Sources */,
+				2433C28C1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m in Sources */,
 				7F0FA9071EAFC79600778B00 /* AppDelegate.m in Sources */,
 				7F0FA9041EAFC79600778B00 /* main.m in Sources */,
 			);
@@ -570,9 +571,10 @@
 			baseConfigurationReference = 3157A49361E7EDC0E2C2C7C9 /* Pods-StartupNameGenerator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V98QDSD7WQ;
 				INFOPLIST_FILE = StartupNameGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.agendor.StartupNameGenerator;
+				PRODUCT_BUNDLE_IDENTIFIER = edilbertoramos.StartupNameGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -582,9 +584,10 @@
 			baseConfigurationReference = ABD311570C8A3134C616C0CE /* Pods-StartupNameGenerator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V98QDSD7WQ;
 				INFOPLIST_FILE = StartupNameGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.agendor.StartupNameGenerator;
+				PRODUCT_BUNDLE_IDENTIFIER = edilbertoramos.StartupNameGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

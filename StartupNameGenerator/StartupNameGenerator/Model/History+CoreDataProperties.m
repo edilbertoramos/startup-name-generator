@@ -17,5 +17,6 @@
 
 @dynamic startupName;
 @dynamic createdAt;
+@dynamic isFavorite;
 
 @end

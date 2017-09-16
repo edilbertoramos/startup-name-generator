@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, copy) NSString *startupName;
 @property (nullable, nonatomic, copy) NSDate *createdAt;
+@property (nullable, nonatomic, copy) Boolean isFavorite;
 
 @end
 

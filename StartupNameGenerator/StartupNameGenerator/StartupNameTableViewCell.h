@@ -1,5 +1,5 @@
 //
-//  NameTableViewCell.h
+//  StartupNameTableViewCell.h
 //  StartupNameGenerator
 //
 //  Created by EDILBERTO DA SILVA RAMOS JUNIOR on 16/09/17.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NameTableViewCell : UITableViewCell
+@interface StartupNameTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
-@property (weak, nonatomic) IBOutlet UIButton *buttonFavorite;
+@property (weak, nonatomic) IBOutlet UIButton *buttomFavorite;
 
 @end

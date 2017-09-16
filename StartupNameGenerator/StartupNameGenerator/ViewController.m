@@ -11,6 +11,7 @@
 #import "Keyword+CoreDataClass.h"
 #import "History+CoreDataClass.h"
 #import <Toast/UIView+Toast.h>
+#import "StartupNameTableViewCell.h"
 
 typedef enum {
     WordPrefix = 1,
@@ -18,7 +19,7 @@ typedef enum {
     PartialSuffix
 } KeywordType;
 
-static NSString * const CellIdentifier = @"AtividadesCell";
+static NSString *CellIdentifier = @"startupNameCell";
 
 @interface ViewController ()
 @property (strong, nonatomic) NSArray *words;
@@ -150,8 +151,8 @@ static NSString * const CellIdentifier = @"AtividadesCell";
 #pragma mark - UITableViewDataSource methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    static NSString *CellIdentifier = @"startupNameCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //static NSString *CellIdentifier = @"startupNameCell";..
+    StartupNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     [self configureCell:cell atIndexPath:indexPath];
 
@@ -163,9 +164,9 @@ static NSString * const CellIdentifier = @"AtividadesCell";
 }
 
 #pragma mark - Utils
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(StartupNameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     History *history = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = history.startupName;
+    cell.labelName.text = history.startupName;
 }
 
 - (BOOL)hasAnyWord {
@@ -234,6 +235,7 @@ static NSString * const CellIdentifier = @"AtividadesCell";
                                                      inManagedObjectContext:context];
     history.startupName = startupName;
     history.createdAt = [NSDate date];
+    history.isFavorite = FALSE;
 }
 
 - (void)deleteAllHistory {
