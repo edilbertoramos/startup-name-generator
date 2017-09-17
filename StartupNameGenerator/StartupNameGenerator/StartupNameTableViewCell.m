@@ -26,7 +26,7 @@
 
 - (void)setValuesWithHistory:(History *)historys andIndex:(NSInteger)row
 {
-    self.labelName.text = [NSString stringWithFormat:@"%@ %@",  self.history.startupName, self.history.createdAt.description] ;
+    self.labelName.text = self.history.startupName;// [NSString stringWithFormat:@"%@ %@",  self.history.startupName, self.history.createdAt.description] ;
     //self.labelName.text = self.history.startupName;
     [self setImageFavorite:self.history.isFavorite];
     NSLog(@"%ld",(long)self.history.isFavorite);

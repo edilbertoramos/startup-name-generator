@@ -39,17 +39,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuT-aG-fyR">
-                                                    <rect key="frame" x="18" y="0.0" width="252" height="44"/>
+                                                    <rect key="frame" x="18" y="0.0" width="240" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Lb-Ea-XBY">
-                                                    <rect key="frame" x="323" y="7" width="31" height="30"/>
-                                                    <color key="backgroundColor" red="0.00082392926560000005" green="0.40081346039999999" blue="0.57550078630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="307" y="0.0" width="44" height="44"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="MWD-D2-89F"/>
-                                                        <constraint firstAttribute="width" constant="31" id="hJa-uZ-LiE"/>
+                                                        <constraint firstAttribute="height" constant="44" id="MWD-D2-89F"/>
+                                                        <constraint firstAttribute="width" constant="44" id="hJa-uZ-LiE"/>
                                                     </constraints>
                                                     <state key="normal" image="favorite_on"/>
                                                     <connections>
@@ -58,12 +57,12 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6Lb-Ea-XBY" firstAttribute="leading" secondItem="SuT-aG-fyR" secondAttribute="trailing" constant="53" id="RkW-Y8-ZMv"/>
+                                                <constraint firstItem="6Lb-Ea-XBY" firstAttribute="leading" secondItem="SuT-aG-fyR" secondAttribute="trailing" constant="49" id="RkW-Y8-ZMv"/>
                                                 <constraint firstItem="6Lb-Ea-XBY" firstAttribute="centerY" secondItem="hpX-iv-bYN" secondAttribute="centerY" id="cBL-y2-YDc"/>
                                                 <constraint firstAttribute="bottom" secondItem="SuT-aG-fyR" secondAttribute="bottom" constant="-0.5" id="f8U-KX-siu"/>
                                                 <constraint firstItem="SuT-aG-fyR" firstAttribute="leading" secondItem="hpX-iv-bYN" secondAttribute="leading" constant="18" id="hGZ-9V-sni"/>
                                                 <constraint firstItem="SuT-aG-fyR" firstAttribute="top" secondItem="hpX-iv-bYN" secondAttribute="top" id="j3b-de-E3e"/>
-                                                <constraint firstAttribute="trailing" secondItem="6Lb-Ea-XBY" secondAttribute="trailing" constant="21" id="vLh-kn-c0n"/>
+                                                <constraint firstAttribute="trailing" secondItem="6Lb-Ea-XBY" secondAttribute="trailing" constant="24" id="vLh-kn-c0n"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
