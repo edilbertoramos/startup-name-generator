@@ -11,9 +11,9 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "Keyword+CoreDataClass.h"
+#import "KeywordStore.h"
 
 @interface HistoryStore : NSObject
-
 
 + (instancetype)sharedStore;
 

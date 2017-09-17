@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2433C28C1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C28B1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m */; };
 		2433C28F1F6DBE5000DE1A7B /* HistoryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C28E1F6DBE5000DE1A7B /* HistoryStore.m */; };
+		2459DC161F6ECB2C00FB1E61 /* KeywordStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2459DC151F6ECB2C00FB1E61 /* KeywordStore.m */; };
 		24C49E2EFCE9015AF1037A53 /* libPods-StartupNameGenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A74B25ABCF5EB0461AA2971 /* libPods-StartupNameGenerator.a */; };
 		7F0FA9041EAFC79600778B00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0FA9031EAFC79600778B00 /* main.m */; };
 		7F0FA9071EAFC79600778B00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0FA9061EAFC79600778B00 /* AppDelegate.m */; };
@@ -44,6 +45,8 @@
 		2433C28B1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupNameTableViewCell.m; sourceTree = "<group>"; };
 		2433C28D1F6DBE5000DE1A7B /* HistoryStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryStore.h; sourceTree = "<group>"; };
 		2433C28E1F6DBE5000DE1A7B /* HistoryStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryStore.m; sourceTree = "<group>"; };
+		2459DC141F6ECB2C00FB1E61 /* KeywordStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordStore.h; sourceTree = "<group>"; };
+		2459DC151F6ECB2C00FB1E61 /* KeywordStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordStore.m; sourceTree = "<group>"; };
 		3157A49361E7EDC0E2C2C7C9 /* Pods-StartupNameGenerator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartupNameGenerator.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-StartupNameGenerator/Pods-StartupNameGenerator.debug.xcconfig"; sourceTree = "<group>"; };
 		5A74B25ABCF5EB0461AA2971 /* libPods-StartupNameGenerator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StartupNameGenerator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F0FA8FF1EAFC79600778B00 /* StartupNameGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartupNameGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +118,6 @@
 			children = (
 				7F0FA9081EAFC79600778B00 /* ViewController.h */,
 				7F0FA9091EAFC79600778B00 /* ViewController.m */,
-				2433C2831F6D8E2200DE1A7B /* CustomCell */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -123,18 +125,46 @@
 		2433C2851F6D9AFE00DE1A7B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7F0FA9131EAFC79600778B00 /* LaunchScreen.storyboard */,
-				7F0FA90B1EAFC79600778B00 /* Main.storyboard */,
+				2459DC191F6ECC7C00FB1E61 /* Storyboard */,
+				2433C2831F6D8E2200DE1A7B /* CustomCell */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		2433C2861F6D9B3300DE1A7B /* Resource */ = {
+		2459DC171F6ECB3900FB1E61 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				7F0FA9111EAFC79600778B00 /* Assets.xcassets */,
+				7F0FA90E1EAFC79600778B00 /* StartupNameGenerator.xcdatamodeld */,
+				7F7DCF821EB054F600A66CF1 /* Keyword+CoreDataClass.h */,
+				7F7DCF831EB054F600A66CF1 /* Keyword+CoreDataClass.m */,
+				7F7DCF841EB054F600A66CF1 /* Keyword+CoreDataProperties.h */,
+				7F7DCF851EB054F600A66CF1 /* Keyword+CoreDataProperties.m */,
+				7F7DCF861EB054F600A66CF1 /* History+CoreDataClass.h */,
+				7F7DCF871EB054F600A66CF1 /* History+CoreDataClass.m */,
+				7F7DCF881EB054F600A66CF1 /* History+CoreDataProperties.h */,
+				7F7DCF891EB054F600A66CF1 /* History+CoreDataProperties.m */,
 			);
-			name = Resource;
+			name = Database;
+			sourceTree = "<group>";
+		};
+		2459DC181F6ECBC300FB1E61 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				2433C28D1F6DBE5000DE1A7B /* HistoryStore.h */,
+				2433C28E1F6DBE5000DE1A7B /* HistoryStore.m */,
+				2459DC141F6ECB2C00FB1E61 /* KeywordStore.h */,
+				2459DC151F6ECB2C00FB1E61 /* KeywordStore.m */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
+		2459DC191F6ECC7C00FB1E61 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				7F0FA90B1EAFC79600778B00 /* Main.storyboard */,
+				7F0FA9131EAFC79600778B00 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboard;
 			sourceTree = "<group>";
 		};
 		493ED99815FA92CF4277EE3D /* Pods */ = {
@@ -175,7 +205,6 @@
 				2433C2851F6D9AFE00DE1A7B /* View */,
 				2433C2841F6D9AC500DE1A7B /* Controller */,
 				7F0FA9021EAFC79600778B00 /* Supporting Files */,
-				2433C2861F6D9B3300DE1A7B /* Resource */,
 			);
 			path = StartupNameGenerator;
 			sourceTree = "<group>";
@@ -183,6 +212,7 @@
 		7F0FA9021EAFC79600778B00 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7F0FA9111EAFC79600778B00 /* Assets.xcassets */,
 				7F0FA9051EAFC79600778B00 /* AppDelegate.h */,
 				7F0FA9061EAFC79600778B00 /* AppDelegate.m */,
 				7F0FA9161EAFC79600778B00 /* Info.plist */,
@@ -199,7 +229,7 @@
 				7F0FA9211EAFC79600778B00 /* Info.plist */,
 			);
 			path = StartupNameGeneratorTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		7F0FA9291EAFC79600778B00 /* StartupNameGeneratorUITests */ = {
 			isa = PBXGroup;
@@ -213,17 +243,8 @@
 		7F7DCF671EB04B1600A66CF1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7F0FA90E1EAFC79600778B00 /* StartupNameGenerator.xcdatamodeld */,
-				7F7DCF821EB054F600A66CF1 /* Keyword+CoreDataClass.h */,
-				7F7DCF831EB054F600A66CF1 /* Keyword+CoreDataClass.m */,
-				7F7DCF841EB054F600A66CF1 /* Keyword+CoreDataProperties.h */,
-				7F7DCF851EB054F600A66CF1 /* Keyword+CoreDataProperties.m */,
-				7F7DCF861EB054F600A66CF1 /* History+CoreDataClass.h */,
-				7F7DCF871EB054F600A66CF1 /* History+CoreDataClass.m */,
-				7F7DCF881EB054F600A66CF1 /* History+CoreDataProperties.h */,
-				7F7DCF891EB054F600A66CF1 /* History+CoreDataProperties.m */,
-				2433C28D1F6DBE5000DE1A7B /* HistoryStore.h */,
-				2433C28E1F6DBE5000DE1A7B /* HistoryStore.m */,
+				2459DC171F6ECB3900FB1E61 /* Database */,
+				2459DC181F6ECBC300FB1E61 /* Store */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -426,6 +447,7 @@
 				7F0FA90A1EAFC79600778B00 /* ViewController.m in Sources */,
 				2433C28C1F6DA0EB00DE1A7B /* StartupNameTableViewCell.m in Sources */,
 				7F0FA9071EAFC79600778B00 /* AppDelegate.m in Sources */,
+				2459DC161F6ECB2C00FB1E61 /* KeywordStore.m in Sources */,
 				2433C28F1F6DBE5000DE1A7B /* HistoryStore.m in Sources */,
 				7F0FA9041EAFC79600778B00 /* main.m in Sources */,
 			);
