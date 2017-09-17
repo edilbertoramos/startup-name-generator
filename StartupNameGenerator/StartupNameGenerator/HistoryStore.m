@@ -22,7 +22,6 @@ typedef enum {
 
 @end
 
-
 @implementation HistoryStore
 
 + (instancetype)sharedStore {
@@ -34,7 +33,6 @@ typedef enum {
         sharedStore = [[self alloc] initPrivate];
         sharedStore.managedObjectContext = appDelegate.persistentContainer.viewContext;
     }
-    
     return sharedStore;
 }
 
@@ -56,7 +54,6 @@ typedef enum {
 - (BOOL)hasOnlyOneWord {
     return self.words && self.words.count == 1;
 }
-
 
 #pragma mark - Generators
 - (void)generateStartupNamesWithKeyword: (NSString *)word {
@@ -139,8 +136,6 @@ typedef enum {
     return [unvowelWord stringByAppendingString:suffix];
 }
 
-
-
 - (NSArray *)findWordPrefixes {
     AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
@@ -218,7 +213,6 @@ typedef enum {
     return keywords;
 }
 
-
 - (nonnull NSString *)randomWord {
     NSString *word = nil;
     if ( [self hasOnlyOneWord] ) {
@@ -283,6 +277,7 @@ typedef enum {
         NSLog(@"Erro ao obter históricos");
     
     for (History *history in historyList) {
+        if (!history.isFavorite)
         [context deleteObject:history];
     }
 }
@@ -299,30 +294,6 @@ typedef enum {
     }
 }
 
-
-
-#pragma mark - Getters & setters
-- (NSFetchedResultsController *)fetchedResultsController {
-    
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
-    
-    NSFetchRequest *fetchRequest = [History fetchRequest];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-    fetchRequest.sortDescriptors = @[sortDescriptor];
-    fetchRequest.fetchBatchSize = 20;
-    
-    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                                               managedObjectContext:context
-                                                                                                 sectionNameKeyPath:nil
-                                                                                                          cacheName:@"StartupNamesCache"];
-    self.fetchedResultsController = fetchedResultsController;    
-    return _fetchedResultsController;
-}
 
 - (NSDate *)lastGenerationRunAt {
     if ( self.lastGenerationRunAt )

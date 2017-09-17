@@ -14,7 +14,6 @@
 
 @interface HistoryStore : NSObject
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 + (instancetype)sharedStore;
 

@@ -13,44 +13,54 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.labelName.text = self.history.startupName;
-    [self setImageFavorite:self.history.isFavorite];
-    
 }
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
+
 - (IBAction)favoriteAction:(id)sender {
-    
-    printf("\n\n");
-    NSLog(@"\n%d", self.history.isFavorite);
-    NSLog(@"\n%@", self.history.startupName.description);
     self.history.isFavorite = !self.history.isFavorite;
-    
     [[HistoryStore sharedStore] saveChanges];
-
-
 }
 
 - (void)setValuesWithHistory:(History *)historys andIndex:(NSInteger)row
 {
-    self.labelName.text = self.history.startupName;
+    self.labelName.text = [NSString stringWithFormat:@"%@ %@",  self.history.startupName, self.history.createdAt.description] ;
+    //self.labelName.text = self.history.startupName;
     [self setImageFavorite:self.history.isFavorite];
-    
-
+    NSLog(@"%ld",(long)self.history.isFavorite);
 }
 
-- (void)setImageFavorite:(Boolean)isTrue
+- (void)setImageFavorite:(Boolean)isFavorite
 {
-    [self.buttomFavorite setImage:[UIImage imageNamed:[self name:isTrue]] forState:UIControlStateNormal];
+    UIImage *image = [UIImage imageNamed:[self imageNamed:isFavorite]];
+    image = [self imageWithColor:[UIColor orangeColor] andImage: image];
+                      
+    [self.buttomFavorite setImage:image forState:UIControlStateNormal];
 }
 
-- (NSString *)name: (Boolean)isTrue
+- (NSString *)imageNamed: (Boolean)isFavorite
 {
-    if (isTrue)
+    if (isFavorite)
         return @"favorite_on";
         return @"favorite_off";
 }
+
+- (UIImage *)imageWithColor:(UIColor *)color1 andImage:(UIImage *)image
+{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGContextClipToMask(context, rect, image.CGImage);
+    [color1 setFill];
+    CGContextFillRect(context, rect);
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 @end

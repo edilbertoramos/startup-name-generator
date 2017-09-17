@@ -14,7 +14,6 @@
 #import "StartupNameTableViewCell.h"
 #import "HistoryStore.h"
 
-
 static NSString *CellIdentifier = @"startupNameCell";
 
 @interface ViewController ()
@@ -167,8 +166,9 @@ static NSString *CellIdentifier = @"startupNameCell";
     NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
 
     NSFetchRequest *fetchRequest = [History fetchRequest];
+    NSSortDescriptor *sortFavorite = [[NSSortDescriptor alloc] initWithKey:@"isFavorite" ascending:NO];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-    fetchRequest.sortDescriptors = @[sortDescriptor];
+    fetchRequest.sortDescriptors = @[sortFavorite, sortDescriptor];
     fetchRequest.fetchBatchSize = 20;
 
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
