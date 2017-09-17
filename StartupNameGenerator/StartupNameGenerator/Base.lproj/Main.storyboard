@@ -217,6 +217,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favorite_on" width="24" height="24"/>
+        <image name="favorite_on" width="36" height="36"/>
     </resources>
 </document>

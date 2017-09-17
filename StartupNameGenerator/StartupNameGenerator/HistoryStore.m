@@ -42,11 +42,11 @@
 
 
 #pragma mark - Generators
-- (void)generateStartupNamesWithKeyword: (NSString *)word {
+- (void)generateStartupNamesWithKeyword: (NSString *)word withDate: (NSDate *)date{
     if ( ![[KeywordStore sharedStore] wordValidation:word])
         return;
     
-    self.lastGenerationRunAt = [NSDate date];
+    self.lastGenerationRunAt = date;
     
     [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithWordPrefix]];
     [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithWordPrefix]];
@@ -65,11 +65,6 @@
     
 }
 
-- (NSDate *)lastGenerationRunAt {
-    if ( self.lastGenerationRunAt )
-        return self.lastGenerationRunAt;
-    return [NSDate date];
-}
 
 #pragma mark - Persistence methods
 - (void)createHistoryWithStartupName:(NSString *)startupName {
@@ -80,7 +75,7 @@
                                                      inManagedObjectContext:context];
     history.id = [[[NSUUID alloc] init] UUIDString];
     history.startupName = startupName;
-    history.createdAt = [NSDate date];
+    history.createdAt = self.lastGenerationRunAt;
     history.isFavorite = NO;
 }
 

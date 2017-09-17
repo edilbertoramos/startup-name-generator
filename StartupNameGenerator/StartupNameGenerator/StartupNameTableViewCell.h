@@ -12,6 +12,7 @@
 @interface StartupNameTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) History *history;
+@property (strong, nonatomic) NSDate *lastGeneratedDate;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *labelName;

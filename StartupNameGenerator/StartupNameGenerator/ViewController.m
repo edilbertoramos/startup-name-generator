@@ -18,6 +18,8 @@ static NSString *CellIdentifier = @"startupNameCell";
 
 @interface ViewController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSDate *lastGenerationRunAt;
+
 @end
 
 @implementation ViewController
@@ -51,7 +53,8 @@ static NSString *CellIdentifier = @"startupNameCell";
     NSString *inputText = [self.inputTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
     if ( inputText && inputText.length > 0 ) {
-        [[HistoryStore sharedStore] generateStartupNamesWithKeyword:inputText];
+        self.lastGenerationRunAt = [NSDate date];
+        [[HistoryStore sharedStore] generateStartupNamesWithKeyword:inputText withDate:self.lastGenerationRunAt];
     } else {
         [self showErrorToast:@"Digite ao menos uma palavra"];
     }
@@ -69,6 +72,7 @@ static NSString *CellIdentifier = @"startupNameCell";
     StartupNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     cell.history = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.lastGeneratedDate = self.lastGenerationRunAt;
     [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath] andIndex:indexPath.row];
     return cell;
 }
@@ -116,6 +120,7 @@ static NSString *CellIdentifier = @"startupNameCell";
         case NSFetchedResultsChangeUpdate:
             
             cell.history = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            cell.lastGeneratedDate = self.lastGenerationRunAt;
             [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath] andIndex:indexPath.row];
 
             break;

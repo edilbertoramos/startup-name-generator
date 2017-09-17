@@ -50,6 +50,7 @@ typedef enum {
 }
 
 
+
 - (BOOL)hasAnyWord {
     return self.words && self.words.count > 0;
 }
@@ -124,6 +125,10 @@ typedef enum {
     return [unvowelWord stringByAppendingString:suffix];
 }
 
+
+
+
+
 - (NSArray *)findWordPrefixes {
     self.fetchRequest.predicate = [NSPredicate predicateWithFormat:@"type == %@", @(WordPrefix)];
     
@@ -137,6 +142,45 @@ typedef enum {
         return [NSArray new];
     
     return keywords;
+}
+
+- (nonnull NSString *)randomWord {
+    NSString *word = nil;
+    if ( [self hasOnlyOneWord] ) {
+        word = self.words.firstObject;
+    } else {
+        NSUInteger index = [self randomWithMax:self.words.count];
+        word = self.words[index];
+    }
+    return word;
+}
+
+- (nonnull NSString *)randomWordPrefix {
+    NSArray<Keyword *> *prefixes = [self findWordPrefixes];
+    NSUInteger index = [self randomWithMax:prefixes.count];
+    return prefixes[index].name;
+}
+
+- (nonnull NSString *)randomWordSuffix {
+    NSArray<Keyword *> *suffixes = [self findWordSuffixes];
+    NSUInteger index = [self randomWithMax:suffixes.count];
+    return suffixes[index].name;
+}
+
+- (nonnull NSString *)randomPartialSuffix {
+    NSArray<Keyword *> *suffixes = [self findPartialSuffixes];
+    NSUInteger index = [self randomWithMax:suffixes.count];
+    return suffixes[index].name;
+}
+
+- (nonnull NSString *)randomWordToMix {
+    NSArray<Keyword *> *words = [self findWordPrefixesAndSuffixes];
+    NSUInteger index = [self randomWithMax:words.count];
+    return words[index].name;
+}
+
+- (NSUInteger)randomWithMax:(NSUInteger)max {
+    return (NSUInteger) arc4random_uniform((uint32_t) max);
 }
 
 - (NSArray *)findWordPrefixesAndSuffixes {
@@ -186,44 +230,6 @@ typedef enum {
 }
 
 
-- (nonnull NSString *)randomWord {
-    NSString *word = nil;
-    if ( [self hasOnlyOneWord] ) {
-        word = self.words.firstObject;
-    } else {
-        NSUInteger index = [self randomWithMax:self.words.count];
-        word = self.words[index];
-    }
-    return word;
-}
-
-- (nonnull NSString *)randomWordPrefix {
-    NSArray<Keyword *> *prefixes = [self findWordPrefixes];
-    NSUInteger index = [self randomWithMax:prefixes.count];
-    return prefixes[index].name;
-}
-
-- (nonnull NSString *)randomWordSuffix {
-    NSArray<Keyword *> *suffixes = [self findWordSuffixes];
-    NSUInteger index = [self randomWithMax:suffixes.count];
-    return suffixes[index].name;
-}
-
-- (nonnull NSString *)randomPartialSuffix {
-    NSArray<Keyword *> *suffixes = [self findPartialSuffixes];
-    NSUInteger index = [self randomWithMax:suffixes.count];
-    return suffixes[index].name;
-}
-
-- (nonnull NSString *)randomWordToMix {
-    NSArray<Keyword *> *words = [self findWordPrefixesAndSuffixes];
-    NSUInteger index = [self randomWithMax:words.count];
-    return words[index].name;
-}
-
-- (NSUInteger)randomWithMax:(NSUInteger)max {
-    return (NSUInteger) arc4random_uniform((uint32_t) max);
-}
 
 
 @end

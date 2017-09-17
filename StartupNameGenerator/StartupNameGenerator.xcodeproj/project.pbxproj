@@ -150,10 +150,10 @@
 		2459DC181F6ECBC300FB1E61 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				2433C28D1F6DBE5000DE1A7B /* HistoryStore.h */,
-				2433C28E1F6DBE5000DE1A7B /* HistoryStore.m */,
 				2459DC141F6ECB2C00FB1E61 /* KeywordStore.h */,
 				2459DC151F6ECB2C00FB1E61 /* KeywordStore.m */,
+				2433C28D1F6DBE5000DE1A7B /* HistoryStore.h */,
+				2433C28E1F6DBE5000DE1A7B /* HistoryStore.m */,
 			);
 			name = Store;
 			sourceTree = "<group>";

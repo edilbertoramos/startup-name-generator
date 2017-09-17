@@ -17,7 +17,7 @@
 
 + (instancetype)sharedStore;
 
-- (void)generateStartupNamesWithKeyword: (NSString *)word;
+- (void)generateStartupNamesWithKeyword: (NSString *)word withDate: (NSDate *)date;
 - (void)deleteAllHistoryExceptFavorite;
 - (void)saveChanges;
 
