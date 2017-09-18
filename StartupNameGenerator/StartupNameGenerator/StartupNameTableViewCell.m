@@ -26,8 +26,8 @@
 
 - (void)setValuesWithHistory:(History *)historys andIndex:(NSInteger)row
 {
-    //self.labelName.text = self.history.startupName;
-    self.labelName.text = [NSString stringWithFormat:@"%@ %@",  self.history.startupName, self.history.createdAt.description] ;
+    self.labelName.text = self.history.startupName;
+    //self.labelName.text = [NSString stringWithFormat:@"%@ %@",  self.history.startupName, self.history.createdAt.description] ;
     switch ([self.history.createdAt compare:self.lastGeneratedDate]) {
         case NSOrderedSame:
                 self.labelName.font = [UIFont boldSystemFontOfSize:17];

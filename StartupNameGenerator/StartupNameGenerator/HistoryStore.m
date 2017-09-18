@@ -17,6 +17,10 @@
 
 @implementation HistoryStore
 
+static NSString *DATA_MODEL_ENTITY_NAME = @"History";
+
+
+#pragma mark - Instancetype
 + (instancetype)sharedStore {
     static HistoryStore *sharedStore = nil;
     
@@ -41,42 +45,102 @@
 }
 
 
-#pragma mark - Generators
-- (void)generateStartupNamesWithKeyword: (NSString *)word withDate: (NSDate *)date{
+#pragma mark - Generators Manager
+- (BOOL)generateStartupNamesWithKeyword: (NSString *)word withDate: (NSDate *)date andNotContainsInHistory: (NSFetchedResultsController *)history {
     if ( ![[KeywordStore sharedStore] wordValidation:word])
-        return;
+        return NO;
     
     self.lastGenerationRunAt = date;
     
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithWordPrefix]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithWordPrefix]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithWordSuffix]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithPartialSuffix]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithPartialSuffix]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithPartialSuffix]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithMixedWords]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithMixedWords]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateNameWithMixedWords]];
-    [self createHistoryWithStartupName:[[KeywordStore sharedStore] generateCrazyName]];
+    NSInteger countNameGerated = 0;
+    NSInteger countAttemptsNameGerated = 0;
     
-    NSError *error = nil;
-    if ( ![self.managedObjectContext save:&error] )
-        NSLog(@"Erro ao salvar históricos. ERROR %@", error.debugDescription);
+    while (countNameGerated < 10) {
+        
+        NSString *startupName = [self generatedName];
+        
+        if([self verifyStartupNameContains:startupName inHistory:history]){
+           
+            [self createHistoryWithStartupName:startupName];
+            
+            NSError *error = nil;
+            if ( ![self.managedObjectContext save:&error] )
+                NSLog(@"Erro ao salvar históricos. ERROR %@", error.debugDescription);
+
+            countNameGerated++;
+        }
+        countAttemptsNameGerated++;
+        if (countAttemptsNameGerated > 400) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+- (NSString *)generatedName
+{
+    NSString *startupName = nil;
+
+    switch ([self randomWithMax:5]) {
+        case 1:
+            startupName = [[KeywordStore sharedStore] generateNameWithWordPrefix];
+            break;
+        case 2:
+            startupName = [[KeywordStore sharedStore] generateNameWithWordSuffix];
+            break;
+        case 3:
+            startupName = [[KeywordStore sharedStore] generateNameWithPartialSuffix];
+            break;
+        case 4:
+            startupName = [[KeywordStore sharedStore] generateNameWithMixedWords];
+            break;
+        default:
+            startupName = [[KeywordStore sharedStore] generateCrazyName];
+            break;
+    }
+    
+    return startupName;
     
 }
 
 
+- (BOOL)verifyStartupNameContains:(NSString *)name inHistory: (NSFetchedResultsController *)history
+{
+    for (id object in history.fetchedObjects)
+    {
+        History *objectHistory = object;
+
+        if ([objectHistory.startupName isEqualToString:name])
+        {
+            return NO;
+        }
+    }
+    if (name.length > 2)
+        return YES;
+    return NO;
+}
+- (NSUInteger)randomWithMax:(NSUInteger)max {
+    return (NSUInteger) arc4random_uniform((uint32_t) max);
+}
+
+
+
 #pragma mark - Persistence methods
 - (void)createHistoryWithStartupName:(NSString *)startupName {
+    
     AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
     
-    History *history = [NSEntityDescription insertNewObjectForEntityForName:@"History"
+    History *history = [NSEntityDescription insertNewObjectForEntityForName:DATA_MODEL_ENTITY_NAME
                                                      inManagedObjectContext:context];
     history.id = [[[NSUUID alloc] init] UUIDString];
     history.startupName = startupName;
     history.createdAt = self.lastGenerationRunAt;
     history.isFavorite = NO;
+    
+    NSLog(@"Cretae: %@", history.startupName);
+
 }
 
 - (void)deleteAllHistoryExceptFavorite {

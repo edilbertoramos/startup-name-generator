@@ -24,6 +24,8 @@ typedef enum {
 
 @implementation KeywordStore
 
+#pragma mark - Instancetype
+
 + (instancetype)sharedStore {
     static KeywordStore *sharedStore = nil;
     
@@ -50,6 +52,8 @@ typedef enum {
 }
 
 
+
+#pragma mark - Utils
 
 - (BOOL)hasAnyWord {
     return self.words && self.words.count > 0;
@@ -127,6 +131,8 @@ typedef enum {
 
 
 
+
+#pragma mark - Find
 
 
 - (NSArray *)findWordPrefixes {
@@ -228,8 +234,5 @@ typedef enum {
     
     return keywords;
 }
-
-
-
 
 @end

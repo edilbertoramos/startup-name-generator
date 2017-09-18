@@ -24,6 +24,9 @@ static NSString *CellIdentifier = @"startupNameCell";
 
 @implementation ViewController
 
+
+static BOOL possibleCombinations = YES;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -36,6 +39,8 @@ static NSString *CellIdentifier = @"startupNameCell";
 }
 
 - (void)setValues{
+    self.inputTextField.delegate = self;
+
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
 }
@@ -53,8 +58,14 @@ static NSString *CellIdentifier = @"startupNameCell";
     NSString *inputText = [self.inputTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
     if ( inputText && inputText.length > 0 ) {
-        self.lastGenerationRunAt = [NSDate date];
-        [[HistoryStore sharedStore] generateStartupNamesWithKeyword:inputText withDate:self.lastGenerationRunAt];
+        if (possibleCombinations){
+            self.lastGenerationRunAt = [NSDate date];
+            possibleCombinations =  [[HistoryStore sharedStore] generateStartupNamesWithKeyword:inputText withDate:self.lastGenerationRunAt andNotContainsInHistory:self.fetchedResultsController];
+        }
+        else
+            [self showErrorToast:@"Não há mais combinações possíveis"];
+        
+            
     } else {
         [self showErrorToast:@"Digite ao menos uma palavra"];
     }
@@ -63,6 +74,7 @@ static NSString *CellIdentifier = @"startupNameCell";
 
 - (IBAction)cleanupButtonTapped:(id)sender {
     [[HistoryStore sharedStore] deleteAllHistoryExceptFavorite];
+    possibleCombinations = YES;
 }
 
 
@@ -81,6 +93,18 @@ static NSString *CellIdentifier = @"startupNameCell";
     return [self.fetchedResultsController.fetchedObjects count];
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    possibleCombinations = YES;
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self dismissKeyboard];
+    return YES;
+}
+
 #pragma mark - Utils
 - (void)showErrorToast:(NSString *)message {
     CSToastStyle *toastStyle = [[CSToastStyle alloc] initWithDefaultStyle];
@@ -91,6 +115,7 @@ static NSString *CellIdentifier = @"startupNameCell";
                 position:[CSToastManager defaultPosition]
                    style:toastStyle];
 }
+
 
 
 #pragma mark - NSFetchedResultsControllerDelegate
