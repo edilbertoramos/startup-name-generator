@@ -46,7 +46,9 @@ static NSString *DATA_MODEL_ENTITY_NAME = @"History";
 
 
 #pragma mark - Generators Manager
-- (BOOL)generateStartupNamesWithKeyword: (NSString *)word withDate: (NSDate *)date andNotContainsInHistory: (NSFetchedResultsController *)history {
+- (BOOL)generateStartupNamesWithKeyword: (NSString *)word
+                               withDate: (NSDate *)date
+                andNotContainsInHistory: (NSFetchedResultsController *)history {
     if ( ![[KeywordStore sharedStore] wordValidation:word])
         return NO;
     
@@ -129,11 +131,8 @@ static NSString *DATA_MODEL_ENTITY_NAME = @"History";
 #pragma mark - Persistence methods
 - (void)createHistoryWithStartupName:(NSString *)startupName {
     
-    AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
-    
     History *history = [NSEntityDescription insertNewObjectForEntityForName:DATA_MODEL_ENTITY_NAME
-                                                     inManagedObjectContext:context];
+                                                     inManagedObjectContext:self.managedObjectContext];
     history.id = [[[NSUUID alloc] init] UUIDString];
     history.startupName = startupName;
     history.createdAt = self.lastGenerationRunAt;
@@ -144,19 +143,16 @@ static NSString *DATA_MODEL_ENTITY_NAME = @"History";
 }
 
 - (void)deleteAllHistoryExceptFavorite {
-    AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
-    
     NSFetchRequest *fetchRequest = [History fetchRequest];
     NSError *error = nil;
-    NSArray *historyList = [context executeFetchRequest:fetchRequest error:&error];
+    NSArray *historyList = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if ( error )
         NSLog(@"Erro ao obter históricos");
     
     for (History *history in historyList) {
         if (!history.isFavorite)
-        [context deleteObject:history];
+        [self.managedObjectContext deleteObject:history];
     }
 }
 

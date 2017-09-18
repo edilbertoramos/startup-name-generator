@@ -60,14 +60,19 @@ static BOOL possibleCombinations = YES;
     if ( inputText && inputText.length > 0 ) {
         if (possibleCombinations){
             self.lastGenerationRunAt = [NSDate date];
-            possibleCombinations =  [[HistoryStore sharedStore] generateStartupNamesWithKeyword:inputText withDate:self.lastGenerationRunAt andNotContainsInHistory:self.fetchedResultsController];
+            possibleCombinations =  [[HistoryStore sharedStore]
+                                     generateStartupNamesWithKeyword:inputText
+                                     withDate:self.lastGenerationRunAt
+                                     andNotContainsInHistory:self.fetchedResultsController];
         }
         else
-            [self showErrorToast:@"Não há mais combinações possíveis"];
-        
-            
+            [self showAlertWithMessage:@"Não há mais combinações possíveis"
+                         andSuccessful:NO
+                           andDuration:[CSToastManager defaultDuration]];
     } else {
-        [self showErrorToast:@"Digite ao menos uma palavra"];
+        [self showAlertWithMessage:@"Digite ao menos uma palavra"
+                     andSuccessful:NO andDuration:[CSToastManager
+                                                   defaultDuration]];
     }
     [self.view endEditing:TRUE];
 }
@@ -85,7 +90,8 @@ static BOOL possibleCombinations = YES;
     
     cell.history = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.lastGeneratedDate = self.lastGenerationRunAt;
-    [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath] andIndex:indexPath.row];
+    [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath]
+                      andIndex:indexPath.row];
     return cell;
 }
 
@@ -95,7 +101,9 @@ static BOOL possibleCombinations = YES;
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
     possibleCombinations = YES;
     return YES;
 }
@@ -106,16 +114,29 @@ static BOOL possibleCombinations = YES;
 }
 
 #pragma mark - Utils
-- (void)showErrorToast:(NSString *)message {
+- (void)showAlertWithMessage:(NSString *)message
+               andSuccessful: (BOOL)success
+                 andDuration: (NSTimeInterval)duration{
+    
     CSToastStyle *toastStyle = [[CSToastStyle alloc] initWithDefaultStyle];
-    toastStyle.backgroundColor = UIColor.redColor;
-
+    if (success)
+        toastStyle.backgroundColor = UIColor.orangeColor;
+    else
+        toastStyle.backgroundColor = UIColor.redColor;
     [self.view makeToast:message
-                duration:[CSToastManager defaultDuration]
+                duration:duration
                 position:[CSToastManager defaultPosition]
                    style:toastStyle];
 }
 
+-(void)changedFavoriteWithOn: (BOOL)isFavorite{
+    if(isFavorite)
+        [self showAlertWithMessage:@"Favorito adicionado" andSuccessful:YES andDuration:1];
+    else
+        [self showAlertWithMessage:@"Favorito removido" andSuccessful:YES andDuration:1];
+    
+    [self dismissKeyboard];
+}
 
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -136,6 +157,7 @@ static BOOL possibleCombinations = YES;
 
         case NSFetchedResultsChangeInsert:
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+
             break;
 
         case NSFetchedResultsChangeDelete:
@@ -143,10 +165,11 @@ static BOOL possibleCombinations = YES;
             break;
 
         case NSFetchedResultsChangeUpdate:
-            
             cell.history = [self.fetchedResultsController objectAtIndexPath:indexPath];
             cell.lastGeneratedDate = self.lastGenerationRunAt;
-            [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath] andIndex:indexPath.row];
+            [cell setValuesWithHistory:[self.fetchedResultsController objectAtIndexPath:indexPath]
+                              andIndex:indexPath.row];
+            [self changedFavoriteWithOn:cell.history.isFavorite];
 
             break;
 
@@ -155,6 +178,8 @@ static BOOL possibleCombinations = YES;
                                                arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [tableView insertRowsAtIndexPaths:[NSArray
                                                arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self changedFavoriteWithOn:cell.history.isFavorite];
+
             break;
     }
 }
@@ -169,6 +194,7 @@ static BOOL possibleCombinations = YES;
 
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+
             break;
 
         case NSFetchedResultsChangeDelete:

@@ -27,10 +27,11 @@
 - (void)setValuesWithHistory:(History *)historys andIndex:(NSInteger)row
 {
     self.labelName.text = self.history.startupName;
-    //self.labelName.text = [NSString stringWithFormat:@"%@ %@",  self.history.startupName, self.history.createdAt.description] ;
     switch ([self.history.createdAt compare:self.lastGeneratedDate]) {
         case NSOrderedSame:
                 self.labelName.font = [UIFont boldSystemFontOfSize:17];
+                if (self.history.isFavorite)
+                    self.labelName.font = [UIFont systemFontOfSize:17];
             break;
             default:
                 self.labelName.font = [UIFont systemFontOfSize:17];
@@ -47,12 +48,14 @@
     image = [self imageWithColor:[UIColor orangeColor] andImage: image];
                       
     [self.buttomFavorite setImage:image forState:UIControlStateNormal];
+    
 }
 
 - (NSString *)imageNamed: (Boolean)isFavorite
 {
-    if (isFavorite)
+    if (isFavorite){
         return @"favorite_on";
+    }
         return @"favorite_off";
 }
 

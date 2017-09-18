@@ -190,7 +190,8 @@ typedef enum {
 }
 
 - (NSArray *)findWordPrefixesAndSuffixes {
-    self.fetchRequest.predicate = [NSPredicate predicateWithFormat:@"type == %@ OR type == %@", @(WordPrefix), @(WordSuffix)];
+    self.fetchRequest.predicate = [NSPredicate
+                                   predicateWithFormat:@"type == %@ OR type == %@", @(WordPrefix), @(WordSuffix)];
     
     NSError *error = nil;
     NSArray *keywords = [self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error];
