@@ -327,7 +327,6 @@
 				TargetAttributes = {
 					7F0FA8FE1EAFC79600778B00 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = V98QDSD7WQ;
 						ProvisioningStyle = Automatic;
 					};
 					7F0FA91A1EAFC79600778B00 = {
@@ -601,7 +600,7 @@
 			baseConfigurationReference = 3157A49361E7EDC0E2C2C7C9 /* Pods-StartupNameGenerator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = V98QDSD7WQ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = StartupNameGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edilbertoramos.StartupNameGenerator;
@@ -614,7 +613,7 @@
 			baseConfigurationReference = ABD311570C8A3134C616C0CE /* Pods-StartupNameGenerator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = V98QDSD7WQ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = StartupNameGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edilbertoramos.StartupNameGenerator;
