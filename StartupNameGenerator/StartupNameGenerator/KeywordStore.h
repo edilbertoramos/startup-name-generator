@@ -14,9 +14,9 @@
 @interface KeywordStore : NSObject
 
 
-+ (instancetype)sharedStore;
++ (instancetype _Nullable )sharedStore;
 
-- (BOOL)wordValidation: (NSString *)word;
+- (BOOL)wordValidation: (NSString *_Nullable)word;
 
 - (nonnull NSString *)generateNameWithWordPrefix;
 - (nonnull NSString *)generateNameWithWordSuffix;
